@@ -23,36 +23,36 @@ export const NavMenuContainer = styled.nav<NavMenuProps>`
   height: 100%;
   width: 100%;
   text-align: center;
-  ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: center;
-    gap: 20px;
-  }
-
   @media ${devices.desktopSmall} {
     opacity: 1;
     visibility: visible;
     position: relative;
     width: fit-content;
     margin-right: auto;
-    ul {
-      flex-direction: row;
-      justify-content: flex-start;
-    }
+  }
+`
+
+export const NavMenuList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  gap: 20px;
+
+  @media ${devices.desktopSmall} {
+    flex-direction: row;
+    justify-content: flex-start;
   }
 
   @media ${devices.desktopMedium} {
-    ul {
-      gap: 40px;
-    }
+    gap: 40px;
   }
 `
 
 export const NavMenuLink = styled.a<NavMenuLinkProps>`
   font-size: 2rem;
+  font-family: 'NeoSansStd';
   position: relative;
   color: ${(props) => props.selected ? `${colors['light/tanat']}` : 'black'};
   opacity: 0.8;
@@ -120,16 +120,19 @@ export const ToggleMenuButton = styled.button`
   }
 `
 
-export const HeaderWrapper = styled.header`
+export const Wrapper = styled.header`
   display: flex;
   width: 100vw;
   align-items: center;
+  background-color: white;
   padding: 5px 20px;
   gap: 15px;
+  margin-bottom: 35px;
+  
   @media ${devices.desktopSmall} {
     padding: 20px 80px;
-    -webkit-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.31); 
-    box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.31);
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.31); 
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.31);
   }
   @media ${devices.desktopMedium} {
     padding: 20px 152px;
@@ -140,24 +143,25 @@ export const CartLogoContainer = styled.div`
   position: relative;
   min-width: 70px;
   height: 60px;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    font-size: 1.1rem;
-    bottom: 0;
-    right: 0;
-    padding: 5px;
-    background-color: white;
-    width: 25px;
-    color: green;
-    font-weight: bold;
-    height: 25px;
-    border-radius: 50%;
-    -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61); 
-    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61);
-  }
+`
+
+export const CartCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  font-size: 1.1rem;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  background-color: white;
+  width: 25px;
+  color: green;
+  font-weight: bold;
+  height: 25px;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61); 
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61);
 `
 
 export const WineLogoContainer = styled.div`
@@ -175,45 +179,43 @@ export const WineLogoContainer = styled.div`
 export const SearchInputContainer = styled.div`
   text-align: right;
   width: 100%;
+`
 
-  input {
-    border: none;
-    border-radius: 50%;
-    padding-right: 15px;
-    padding-left: 5px;
-    width: 50px;
-    height: 50px;
-    background-image: url('/icons/glass.svg');
-    background-repeat: no-repeat;
-    background-position: 95% 50%;
-    background-size: 35px;
-    transition: 300ms;
-    color: rgba(0, 0, 0, 0.8);
+export const SearchInput = styled.input`
+  border: none;
+  border-radius: 50%;
+  padding-right: 15px;
+  padding-left: 5px;
+  width: 50px;
+  height: 50px;
+  background-image: url('/icons/glass.svg');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-size: 35px;
+  transition: 300ms;
+  color: rgba(0, 0, 0, 0.8);
 
-    &::placeholder {
-      opacity: 0;
-    }
-    
-    &:focus, &:not(:placeholder-shown) {
-      border-radius: 10px;
-      outline: none;
-      width: 100%;
-      background-color: #f5f5f5;
-      background-image: none;
-    }
+  &::placeholder {
+    opacity: 0;
   }
-  @media ${devices.desktopSmall} {
-    input {
-      border: 2px solid black;
-      background-position: center ;
-      &:focus, &:not(:placeholder-shown) {
-        background-image: url('/icons/glass.svg');
-        border: none;
-        background-position: 95% 50%;
-        background-size: 15px;
-      }
-    }
+  
+  &:focus, &:not(:placeholder-shown) {
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    background-color: #f5f5f5;
+    background-image: none;
+  }
 
+  @media ${devices.desktopSmall} {
+    border: 2px solid black;
+    background-position: center ;
+    &:focus, &:not(:placeholder-shown) {
+      background-image: url('/icons/glass.svg');
+      border: none;
+      background-position: 95% center;
+      background-size: 15px;
+    }
   }
 `
 
