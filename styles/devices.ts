@@ -1,8 +1,10 @@
+import sizes from './sizes';
+
 const devices = {
-  mobileSmall: "(max-width: 376px)",
-  tablet: "(min-width: 700px)",
-  desktopSmall: "(min-width: 1000px)",
-  desktopMedium: "(min-width: 1250px)",
+  mobileSmall: `(max-width: ${sizes.mobileSmall}px)`,
+  tablet: `(min-width: ${sizes.tablet}px)`,
+  desktopSmall: `(min-width: ${sizes.desktopSmall}px)`,
+  desktopMedium: `(min-width: ${sizes.desktopMedium}px)`,
 }
 
 export default devices;

@@ -25,6 +25,7 @@ export default createGlobalStyle`
   body {
     background-color: ${colors.background};
     font-size: 16px;
+    overflow-x: hidden;
   }
   * {
     text-decoration: none;
