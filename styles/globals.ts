@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import colors from "./colors";
+import devices from "./devices";
 
 export default createGlobalStyle`
   @font-face {
@@ -17,18 +19,19 @@ export default createGlobalStyle`
 
   #__next {
     height: 100%;
-    overflow: hidden;
+    max-width: 100vw;
   }
 
   body {
-    height: 100vh;
-    background-color: #F5F5F5;
+    background-color: ${colors.background};
+    font-size: 16px;
   }
   * {
     text-decoration: none;
     margin: 0;
     box-sizing: border-box;
     list-style: none;
+    border: none;
     font-family: 'Lato', sans-serif;
     padding: 0;
   }
