@@ -1,17 +1,19 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useMemo } from "react";
+import { useCart } from "../../../context/CartContext";
 import { useSearch } from "../../../context/SearchContext";
 import * as Styled from './style';
 
 const TheHeader: NextPage = () => {
   const [showNav, setShowNav] = useState<boolean>(false);
-  const itemsInCart = 5;
   const { route } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
 
   const { updateSearch } = useSearch();
+  const { items } = useCart();
+  const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearch({ query: e.target.value });
@@ -65,7 +67,7 @@ const TheHeader: NextPage = () => {
             objectFit="contain"
             layout="fill"
           />
-          <Styled.CartCount>{ itemsInCart }</Styled.CartCount>
+          <Styled.CartCount>{ cartCount }</Styled.CartCount>
         </Styled.CartLogoContainer>
       </Styled.OptionsSection>
     </Styled.Wrapper>

@@ -1,17 +1,9 @@
 import styled from 'styled-components';
 import devices from '../../../styles/devices';
-import colors from '../../../styles/colors.json';
+import colors from '../../../styles/colors';
 
 
-interface NavMenuProps {
-  show: boolean
-}
-
-interface NavMenuLinkProps {
-  selected: boolean,
-}
-
-export const NavMenuContainer = styled.nav<NavMenuProps>`
+export const NavMenuContainer = styled.nav<{show: boolean}>`
   opacity: ${(props) => props.show ? '1' : '0'};
   visibility: ${(props) => props.show ? 'visible' : 'hidden'};
   position: absolute;
@@ -50,11 +42,11 @@ export const NavMenuList = styled.ul`
   }
 `
 
-export const NavMenuLink = styled.a<NavMenuLinkProps>`
+export const NavMenuLink = styled.a<{selected: boolean}>`
   font-size: 2rem;
   font-family: 'NeoSansStd';
   position: relative;
-  color: ${(props) => props.selected ? `${colors['light/tanat']}` : 'black'};
+  color: ${(props) => props.selected ? `${colors.light_tanat}` : 'black'};
   opacity: 0.8;
   &::after {
     content: '';
@@ -65,7 +57,7 @@ export const NavMenuLink = styled.a<NavMenuLinkProps>`
     left: 0;
     width: 100%;
     height: 5px;
-    background-color: ${colors['light/tanat']};
+    background-color: ${colors.light_tanat};
   }
 
   @media ${devices.desktopSmall} {
@@ -96,10 +88,9 @@ export const ToggleMenuButton = styled.button`
 
   &, &::before, &::after {
     background-color: black;
-    height: 5px;
-    min-width: 30px;
+    height: 3px;
+    min-width: 22px;
     border-radius: 2px;
-
   }
   &::before, &::after {
     left: 0;
@@ -109,11 +100,11 @@ export const ToggleMenuButton = styled.button`
   }
 
   &::before {
-    top: 9px;
+    top: 6px;
   }
 
   &::after {
-    bottom: 9px;
+    bottom: 6px;
   }
   @media ${devices.desktopSmall} {
     display: none;
@@ -135,7 +126,7 @@ export const Wrapper = styled.header`
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.31);
   }
   @media ${devices.desktopMedium} {
-    padding: 20px 152px;
+    padding-inline: 15vw;
   }
 `
 
@@ -145,7 +136,7 @@ export const CartLogoContainer = styled.div`
   height: 60px;
 `
 
-export const CartCount = styled.div`
+export const CartCount = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,20 +151,21 @@ export const CartCount = styled.div`
   font-weight: bold;
   height: 25px;
   border-radius: 50%;
-  -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61); 
-  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61);
+  @media ${devices.desktopSmall} { 
+    -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61); 
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61);
+  }
 `
 
 export const WineLogoContainer = styled.div`
   position: relative;
-  min-width: 80px;
-  height: 50px;
+  width: 78px;
+  height: 22px;
   margin-right: auto;
   @media ${devices.desktopSmall} { 
     min-width: 110px;
     height: 100;
   }
-
 `
 
 export const SearchInputContainer = styled.div`
@@ -186,12 +178,12 @@ export const SearchInput = styled.input`
   border-radius: 50%;
   padding-right: 15px;
   padding-left: 5px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   background-image: url('/icons/glass.svg');
   background-repeat: no-repeat;
   background-position: 95% 50%;
-  background-size: 35px;
+  background-size: 24px;
   transition: 300ms;
   color: rgba(0, 0, 0, 0.8);
 
@@ -203,7 +195,7 @@ export const SearchInput = styled.input`
     border-radius: 10px;
     outline: none;
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: ${colors.background};
     background-image: none;
   }
 
