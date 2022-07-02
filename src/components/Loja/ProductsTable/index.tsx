@@ -5,7 +5,6 @@ import PaginationControllerMobile from "../PaginationControllerMobile";
 import ProductCard from "../ProductCard";
 import * as Styled from './style';
 
-
 const ProductsTable: React.FC<{products: Product[], isDesktop: boolean}> = ({ products, isDesktop }) => {
   const [itemsPerPage, setItemPerPage] = useState<number>(8);
   const [currentPage, setCurrentPage] = useState<number>(1);

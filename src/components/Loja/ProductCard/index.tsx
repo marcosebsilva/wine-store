@@ -4,11 +4,13 @@ import Product from "../../../types/Product";
 import BaseMemberPrice from "../../UI/BaseMemberPrice";
 import * as Styled from './style';
 import { formatPrice } from "../../../utils/functions";
+import { useRouter } from "next/router";
 
 const ProductCard: React.FC<{product: Product}> = ({ product }) => {
   const { name, image, flag,price, discount, priceMember, priceNonMember } = product;
   const formatedPrice = formatPrice(price);
   const formatedNonMemberPrice= formatPrice(priceNonMember);
+  const router = useRouter();
 
   const { addToCart } = useCart();
 
@@ -17,7 +19,9 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
   }
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper
+      onClick={() => router.push(`loja/${product.id}`, undefined, {shallow: true})}
+    >
       <Styled.CardContainer>
         <Styled.ImageContainer>
           <Styled.FlagContainer>

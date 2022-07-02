@@ -1,6 +1,7 @@
 const colors = {
   light_tanat: "rgba(209, 75, 143, 0.8)",
   gray_darker: "rgba(17, 17, 17, 1)",
+  gray_lighter: "rgba(136, 136, 136, 1)",
   blacker: "rgba(85, 85, 85, 1)",
   bold_blacker: "rgba(29, 29, 27, 1)",
   background: "rgba(245, 245, 245, 1)",

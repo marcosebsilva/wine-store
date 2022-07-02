@@ -37,7 +37,7 @@ const TheHeader: NextPage = () => {
         {navMenuLinks.map((link, idx) => (
           <li key={`link${idx}`}>
             <Styled.NavMenuLink
-              selected={route === `/${link.toLowerCase()}`}
+              selected={route.includes(link.toLowerCase())}
             >
               {link}
             </Styled.NavMenuLink>
