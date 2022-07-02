@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import Image from "next/image";
 import { useCart } from "../../../context/CartContext";
 import Product from "../../../types/Product";
@@ -6,7 +5,7 @@ import BaseMemberPrice from "../../UI/BaseMemberPrice";
 import * as Styled from './style';
 import { formatPrice } from "../../../utils/functions";
 
-const ProductCard: NextPage<{product: Product}> = ({ product }) => {
+const ProductCard: React.FC<{product: Product}> = ({ product }) => {
   const { name, image, flag,price, discount, priceMember, priceNonMember } = product;
   const formatedPrice = formatPrice(price);
   const formatedNonMemberPrice= formatPrice(priceNonMember);

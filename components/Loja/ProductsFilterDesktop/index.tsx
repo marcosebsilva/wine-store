@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { SearchOptions, useSearch } from '../../../context/SearchContext'
 import BaseInputRadio from "../../UI/BaseInputRadio";
@@ -40,7 +39,7 @@ const priceFilters: PriceFilter[] = [
 
 ];
 
-const ProductsFilter: NextPage = () => {
+const ProductsFilter: React.FC = () => {
   const [selectedPriceRange, setSelectedPriceRange] = useState<Omit<SearchOptions, 'query'>>({ maxPrice: null, minPrice: null });
   const { updateSearch } = useSearch();
   

@@ -28,6 +28,9 @@ export const ImageContainer = styled.div`
   text-align: center;
   width: 123px;
   margin: auto;
+  @media ${devices.tablet} {
+    width: 100%;
+  }
 `
 export const DetailsWrapper = styled.section`
   display: flex;
