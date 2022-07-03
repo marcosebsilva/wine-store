@@ -17,10 +17,19 @@ export const FlagContainer = styled.div`
   height: 16px;
 `
 export const CountryText = styled.p`
-    /* 14px */
 `
-
 export const Text= styled.p`
   color: ${colors.gray_lighter};
-
+`
+export const StarImageContainer = styled.div`
+  position: relative;
+  width: 14px;
+  height: 14px;
+`
+export const StarsContainer = styled.div`
+  display: flex;
+`
+export const AvaliationCount = styled.span`
+  margin-left: 20px;
+  color: ${colors.bold_blacker};
 `
