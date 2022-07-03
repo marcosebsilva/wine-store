@@ -8,7 +8,7 @@ import DiscountTag from "../../UI/DiscountTag";
 import BasePrice from "../../UI/BasePrice";
 import BaseCartButton from "../../UI/BaseCartButton";
 import NonMemberPrice from "../../UI/NonMemberPrice";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent } from "react";
 import testSelectors from "../../../../cypress/fixtures/test_selectors";
 
 
@@ -42,6 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, cardClickCallback = 
             objectFit="contain"
             layout="fill"
             quality={100}
+            priority={true}
           />
         </Styled.ImageContainer>
         <Styled.DetailsWrapper>

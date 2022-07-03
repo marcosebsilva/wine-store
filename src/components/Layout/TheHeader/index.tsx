@@ -23,7 +23,7 @@ const TheHeader: NextPage = () => {
   const { updateSearch } = useSearch();
   const { width } = useScreenSize();
 
-  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width])
+  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -63,6 +63,7 @@ const TheHeader: NextPage = () => {
           src="/icons/wine-logo.svg"
           objectFit="contain"
           layout="fill"
+          priority={true}
         />
       </Styled.WineLogoContainer>
       <Styled.NavMenuContainer show={showNav} data-testid={testSelectors.navMenu}>
@@ -96,6 +97,7 @@ const TheHeader: NextPage = () => {
               alt="Wine icon"
               objectFit="contain"
               layout="fill"
+              priority={true}
             />
           </Styled.AccountIconContainer>
         )}
@@ -109,6 +111,7 @@ const TheHeader: NextPage = () => {
             alt="Wine icon"
             objectFit="contain"
             layout="fill"
+            priority={true}
           />
           <Styled.CartCount data-testid={testSelectors.cartCount}>{ cartCount }</Styled.CartCount>
         </Styled.CartLogoContainer>

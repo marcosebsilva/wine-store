@@ -32,8 +32,7 @@ export const ToggleMenuButton = styled.button`
   }
 `
 export const NavMenuContainer = styled.nav<{show: boolean}>`
-  opacity: ${(props) => props.show ? '1' : '0'};
-  visibility: ${(props) => props.show ? 'visible' : 'hidden'};
+  width: ${(props) => props.show ? '100%' : '0'};
   position: fixed;
   z-index: 10;
   background-color: white;
@@ -41,8 +40,8 @@ export const NavMenuContainer = styled.nav<{show: boolean}>`
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
   text-align: center;
+  overflow: hidden;
 
   ${ToggleMenuButton} {
     position: absolute;
