@@ -46,6 +46,7 @@ export const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   padding-inline: 20px;
+  padding-bottom: 80px;
   @media ${devices.desktopSmall} {
     display: grid;
     padding-inline: 15vw;

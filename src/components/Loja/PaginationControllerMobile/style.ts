@@ -19,6 +19,11 @@ export const Button = styled.button`
   font-size: 0.875rem;
   /* 14px */
   border: 2px solid ${colors.wine_purple};
+  &:disabled {
+    color: ${colors.gray};
+    border-color: ${colors.gray};
+    opacity: 0.5;
+  }
 `
 
 export const ResultCount = styled.h3`
