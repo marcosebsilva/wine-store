@@ -7,6 +7,8 @@ import { useSearch } from "../../../context/SearchContext";
 import * as Styled from './style';
 import { KeyboardEvent } from "react";
 import Link from "next/link";
+import useScreenSize from "../../../hooks/useScreenSize";
+import sizes from "../../../styles/sizes";
 
 
 const TheHeader: NextPage = () => {
@@ -18,6 +20,9 @@ const TheHeader: NextPage = () => {
   const { route, push, asPath } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
   const { updateSearch } = useSearch();
+  const { width } = useScreenSize();
+
+  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -31,14 +36,13 @@ const TheHeader: NextPage = () => {
   }
 
   useEffect(() => {
+    if (isDesktop) return;
     setShowNav(false);
-  }, [asPath])
+  }, [asPath, isDesktop])
 
   return (
     <Styled.Wrapper>
-      <Styled.ToggleMenuButton
-        onClick={() => setShowNav((prev) => !prev)}
-      />
+      {!isDesktop && <Styled.ToggleMenuButton onClick={() => setShowNav((prev) => !prev)} />}
       <Styled.WineLogoContainer>
         <Image 
           alt="Logotipo principal Wine"
@@ -71,14 +75,16 @@ const TheHeader: NextPage = () => {
             onKeyDown={handleKeyDown}
           />
         </Styled.SearchInputContainer>
-        <Styled.AccountIconContainer>
-          <Image
-            src="/icons/account.svg"
-            alt="Wine icon"
-            objectFit="contain"
-            layout="fill"
-          />
-        </Styled.AccountIconContainer>
+        {isDesktop && (
+          <Styled.AccountIconContainer>
+            <Image
+              src="/icons/account.svg"
+              alt="Wine icon"
+              objectFit="contain"
+              layout="fill"
+            />
+          </Styled.AccountIconContainer>
+        )}
         <Styled.CartLogoContainer>
           <Image
             src="/icons/wine-cart.svg"
