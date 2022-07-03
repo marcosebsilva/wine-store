@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import DiscountTag from "../../UI/DiscountTag";
 import BasePrice from "../../UI/BasePrice";
 import BaseCartButton from "../../UI/BaseCartButton";
+import NonMemberPrice from "../../UI/NonMemberPrice";
 
 const ProductCard: React.FC<{product: Product}> = ({ product }) => {
   const { name, image,price, discount, priceMember, priceNonMember } = product;
@@ -15,7 +16,7 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
   const { addToCart } = useCart();
 
   const handleButtonClick = () => {
-    addToCart(product);
+    addToCart(product, 1);
   }
 
   return (
@@ -45,13 +46,10 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
             <Styled.MemberPriceLabel>Sócio Wine</Styled.MemberPriceLabel>
             <BaseMemberPrice price={priceMember}/>
           </Styled.GenericContainer>
-          <Styled.GenericContainer>
-            <Styled.NonMemberPriceLabel>Não sócio</Styled.NonMemberPriceLabel>
-            <BasePrice
-              dashed={false}
-              price={priceNonMember}
-            />
-          </Styled.GenericContainer>
+          <NonMemberPrice
+            label="Não sócio"
+            price={priceNonMember}
+          />
         </Styled.DetailsWrapper>
       </Styled.CardContainer>
       <BaseCartButton

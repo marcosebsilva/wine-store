@@ -1,15 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import useScreenSize from "../../../hooks/useScreenSize";
+import sizes from "../../../styles/sizes";
 import Product from "../../../types/Product";
 import PaginationController from "../PaginationControllerDesktop";
 import PaginationControllerMobile from "../PaginationControllerMobile";
 import ProductCard from "../ProductCard";
 import * as Styled from './style';
 
-const ProductsTable: React.FC<{products: Product[], isDesktop: boolean}> = ({ products, isDesktop }) => {
+const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
   const [itemsPerPage, setItemPerPage] = useState<number>(8);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [paginatedProducts, setPaginatedProducts] = useState<Product[]>(products);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const { width } = useScreenSize();
+  const isDesktop = useMemo(() => width !== undefined && width >= sizes.desktopSmall, [width])
 
   const totalProducts = useMemo(() => products.length, [products]);
   const pageCount = useMemo(() => Math.ceil(totalProducts / itemsPerPage), [totalProducts, itemsPerPage]);

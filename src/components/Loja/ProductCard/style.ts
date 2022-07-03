@@ -44,7 +44,6 @@ export const ProductName = styled.h1`
   font-weight: bold;
   color: ${colors.gray_darker};
   font-size: 0.875rem;
-  /* 14px */
   @media ${devices.desktopSmall} {
     font-size: 1rem;
   }
@@ -52,9 +51,8 @@ export const ProductName = styled.h1`
 export const MemberPriceLabel = styled.label`
   font-weight: 300;
   font-size: 0.625rem;
-  /* 10px */
   margin-right: 5px;
-  color: ${colors.blacker};
+  color: ${colors.gray};
   display: inline-block;
   text-transform: uppercase;
   text-align: center;
@@ -66,22 +64,9 @@ export const MemberPriceLabel = styled.label`
     font-weight: 700;
     color: ${colors.bold_blacker};
     font-size: 0.75rem;
-    /* 12px */
   }
 `
 export const GenericContainer = styled.div`
   display: flex;
   align-items: center;
-`
-export const NonMemberPriceLabel = styled.label`
-  font-size: 0.625rem;
-  /* 10px */
-  text-transform: uppercase;
-  margin-right: 5px;
-  color: ${colors.blacker};
-
-  @media ${devices.desktopSmall} {
-    font-size: 0.75rem;
-    /* 12px */
-  }
 `
