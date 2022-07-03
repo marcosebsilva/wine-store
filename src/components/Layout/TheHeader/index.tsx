@@ -5,18 +5,27 @@ import { ChangeEvent, useState, useMemo } from "react";
 import { useCart } from "../../../context/CartContext";
 import { useSearch } from "../../../context/SearchContext";
 import * as Styled from './style';
+import { KeyboardEvent } from "react";
+
 
 const TheHeader: NextPage = () => {
   const [showNav, setShowNav] = useState<boolean>(false);
+  const [input, setInput] = useState<string>('');
+  const { items } = useCart();
+
+  const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
   const { route } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
-
   const { updateSearch } = useSearch();
-  const { items } = useCart();
-  const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearch({ query: e.target.value });
+    setInput(e.target.value);
+  }
+
+  const handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      updateSearch({query: input});
+    }
   }
 
   return (
@@ -48,8 +57,10 @@ const TheHeader: NextPage = () => {
       <Styled.OptionsSection>
         <Styled.SearchInputContainer>
           <Styled.SearchInput
-            placeholder="null"
+            placeholder="Pressione enter para pesquisar"
             onChange={handleInputChange}
+            value={input}
+            onKeyDown={handleKeyDown}
           />
         </Styled.SearchInputContainer>
         <Styled.AccountIconContainer>

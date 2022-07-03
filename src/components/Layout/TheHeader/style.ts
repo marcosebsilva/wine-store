@@ -47,6 +47,7 @@ export const NavMenuLink = styled.a<{selected: boolean}>`
   font-family: 'NeoSansStd';
   position: relative;
   color: ${(props) => props.selected ? `${colors.light_tanat}` : 'black'};
+  cursor: ${(props) => props.selected ? 'pointer' : 'not-allowed'};
   opacity: 0.8;
   &::after {
     content: '';
@@ -176,14 +177,12 @@ export const SearchInputContainer = styled.div`
 export const SearchInput = styled.input`
   border: none;
   border-radius: 50%;
-  padding-right: 15px;
-  padding-left: 5px;
   width: 25px;
   height: 25px;
   background-image: url('/icons/glass.svg');
   background-repeat: no-repeat;
   background-position: 95% 50%;
-  background-size: 24px;
+  background-size: 23px;
   transition: 300ms;
   color: rgba(0, 0, 0, 0.8);
 
@@ -192,6 +191,10 @@ export const SearchInput = styled.input`
   }
   
   &:focus, &:not(:placeholder-shown) {
+    &::placeholder {
+      opacity: 1;
+    }
+    padding-inline: 20px;
     border-radius: 10px;
     outline: none;
     width: 100%;
@@ -201,7 +204,10 @@ export const SearchInput = styled.input`
 
   @media ${devices.desktopSmall} {
     border: 2px solid black;
-    background-position: center ;
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-size: 30px;
     &:focus, &:not(:placeholder-shown) {
       background-image: url('/icons/glass.svg');
       border: none;
@@ -214,6 +220,7 @@ export const SearchInput = styled.input`
 export const AccountIconContainer = styled.div`
   position: relative;
   display: none;
+  cursor: not-allowed;
   @media ${devices.desktopSmall} {
     min-width: 70px;
     height: 60px;
