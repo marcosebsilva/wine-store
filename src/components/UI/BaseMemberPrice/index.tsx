@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { useEffect } from "react";
 import * as Styled from './style';
 import { formatMemberPrice } from "./utils";
 
