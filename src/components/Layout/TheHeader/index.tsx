@@ -14,7 +14,7 @@ const TheHeader: NextPage = () => {
   const { items } = useCart();
 
   const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
-  const { route } = useRouter();
+  const { route, push } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
   const { updateSearch } = useSearch();
 
@@ -25,6 +25,7 @@ const TheHeader: NextPage = () => {
   const handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       updateSearch({query: input});
+      push('/loja');
     }
   }
 
