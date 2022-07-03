@@ -76,15 +76,23 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
     }
   }
 
+  const cardClickCallback = () => { 
+    console.log('redirecting...');
+  }
+
   return(
     <Styled.Wrapper>
       <Styled.ResultCount>
         <b>{totalProducts}</b> produtos encontrados
       </Styled.ResultCount>
       <Styled.ProductsContainer>
-        {loading
-          ? (<p>Loading</p>)
-          : (paginatedProducts.map((product) => <ProductCard key={product.id} product={product}/>))
+        {!loading && (paginatedProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              cardClickCallback={cardClickCallback}
+            />
+          )))
         }
       </Styled.ProductsContainer>
       {isDesktop

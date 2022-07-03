@@ -12,6 +12,12 @@ export const CardContainer = styled.div`
   border-radius: 4px;
   padding: 8px;
   height: 348px;
+  transition: 200ms;
+  @media ${devices.desktopSmall}{
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
 `
 export const Wrapper = styled.div`
   display: flex;

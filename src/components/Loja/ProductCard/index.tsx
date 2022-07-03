@@ -8,8 +8,14 @@ import DiscountTag from "../../UI/DiscountTag";
 import BasePrice from "../../UI/BasePrice";
 import BaseCartButton from "../../UI/BaseCartButton";
 import NonMemberPrice from "../../UI/NonMemberPrice";
+import { MouseEvent, useEffect, useState } from "react";
 
-const ProductCard: React.FC<{product: Product}> = ({ product }) => {
+
+interface ProductCardProps {
+  cardClickCallback?: () => void,
+  product: Product,
+}
+const ProductCard: React.FC<ProductCardProps> = ({ product, cardClickCallback = () => {} }) => {
   const { name, image,price, discount, priceMember, priceNonMember } = product;
   const router = useRouter();
 
@@ -19,11 +25,15 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
     addToCart(product, 1);
   }
 
+  const handleCardClick = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    cardClickCallback();
+    router.push(`loja/${product.id}`)
+  }
+
   return (
-    <Styled.Wrapper
-      onClick={() => router.push(`loja/${product.id}`)}
-    >
-      <Styled.CardContainer>
+    <Styled.Wrapper>
+      <Styled.CardContainer onClick={handleCardClick}>
         <Styled.ImageContainer>
           <Image 
             alt={`Foto do produto ${name}`}
