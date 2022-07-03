@@ -44,7 +44,7 @@ export const NonMemberPriceLabel = styled.label`
   /* 10px */
   text-transform: uppercase;
   margin-right: 5px;
-  color: ${colors.blacker};
+  color: ${colors.gray};
 
   @media ${devices.desktopSmall} {
     font-size: 0.75rem;
@@ -53,7 +53,7 @@ export const NonMemberPriceLabel = styled.label`
 `
 export const NonMemberPriceContainer = styled.div`
   ${BasePriceWrapper} {
-    color: ${colors.blacker};
+    color: ${colors.gray};
     font-weight: normal;
   }
 `

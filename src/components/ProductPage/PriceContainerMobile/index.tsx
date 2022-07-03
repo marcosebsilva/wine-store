@@ -1,7 +1,9 @@
+import Product from '../../../types/Product';
 import BaseCartButton from '../../UI/BaseCartButton';
 import BaseMemberPrice from '../../UI/BaseMemberPrice';
 import BasePrice from '../../UI/BasePrice';
 import DiscountTag from '../../UI/DiscountTag';
+import NonMemberPrice from '../../UI/NonMemberPrice';
 import * as Styled from './style';
 
 interface PriceContainerMobilePorps {
@@ -12,7 +14,7 @@ interface PriceContainerMobilePorps {
   handleButtonClick: () => void
 }
 
-const PriceContainerMobile: React.FC<PriceContainerMobilePorps> = ({ discount, price, priceMember, priceNonMember, handleButtonClick }) => {
+const PriceContainerMobile: React.FC<PriceContainerMobilePorps> = ({discount, price, priceMember, priceNonMember, handleButtonClick}) => {
   return(
     <Styled.Wrapper>
       <DiscountTag discount={discount}/>
@@ -22,15 +24,10 @@ const PriceContainerMobile: React.FC<PriceContainerMobilePorps> = ({ discount, p
           dashed={true}
         />
         <BaseMemberPrice price={priceMember} />
-        <Styled.NonMemberPriceContainer>
-          <Styled.NonMemberPriceLabel>
-            Preço não-sócio
-          </Styled.NonMemberPriceLabel>
-          <BasePrice
-            price={priceNonMember}
-            dashed={false}
-          />
-        </Styled.NonMemberPriceContainer>
+        <NonMemberPrice
+          price={priceNonMember}
+          label="Preço não-sócio"
+        />         
       </Styled.PriceWrapper>
       <BaseCartButton
         handleClick={handleButtonClick}
