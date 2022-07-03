@@ -11,7 +11,7 @@ const BaseMemberPrice: NextPage<{price: number}> = ({price}) => {
       {' '}
       <Styled.Integer>{integer}</Styled.Integer>
       {','}
-      {decimals}
+      <Styled.Decimals>{decimals}</Styled.Decimals>
     </Styled.Wrapper>
   );
 }

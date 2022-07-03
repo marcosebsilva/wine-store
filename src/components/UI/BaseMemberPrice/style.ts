@@ -13,3 +13,6 @@ export const Integer = styled.span`
   font-size: 1.13rem;
   /* 18px */
 `
+
+export const Decimals = styled.span`
+`
