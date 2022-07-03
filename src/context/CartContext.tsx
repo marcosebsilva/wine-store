@@ -7,7 +7,7 @@ interface ProductInCart extends Product {
 
 interface CartContext {
   items: ProductInCart[],
-  addToCart: (newItem: Product) => void,
+  addToCart: (newItem: Product, quantity: number) => void,
   removeFromCart: (id: number) => void,
   increaseItemQuantity: (id: number) => void,
   decreaseItemQuantity: (id: number) => void,
@@ -85,17 +85,17 @@ export function CartProvider({ children }: React.PropsWithChildren) {
     }));
   }, [cart, findItemInCart]);
 
-  const addToCart = useCallback((newItem: Product) => {
+  const addToCart = useCallback((newItem: Product, quantity: number = 1) => {
     const item = findItemInCart(newItem.id);
     if (item) {
-      increaseItemQuantity(newItem.id);
+      increaseItemQuantity(newItem.id, quantity);
       return;
     }
     const newCartItems = [
       ...cart.items,
       {
         ...newItem,
-        quantity: 1
+        quantity,
       }
     ];
 
