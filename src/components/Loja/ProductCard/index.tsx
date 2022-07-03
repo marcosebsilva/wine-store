@@ -3,13 +3,13 @@ import { useCart } from "../../../context/CartContext";
 import Product from "../../../types/Product";
 import BaseMemberPrice from "../../UI/BaseMemberPrice";
 import * as Styled from './style';
-import { formatPrice } from "../../../utils/functions";
 import { useRouter } from "next/router";
+import DiscountTag from "../../UI/DiscountTag";
+import BasePrice from "../../UI/BasePrice";
+import BaseCartButton from "../../UI/BaseCartButton";
 
 const ProductCard: React.FC<{product: Product}> = ({ product }) => {
-  const { name, image, flag,price, discount, priceMember, priceNonMember } = product;
-  const formatedPrice = formatPrice(price);
-  const formatedNonMemberPrice= formatPrice(priceNonMember);
+  const { name, image,price, discount, priceMember, priceNonMember } = product;
   const router = useRouter();
 
   const { addToCart } = useCart();
@@ -20,19 +20,10 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
 
   return (
     <Styled.Wrapper
-      onClick={() => router.push(`loja/${product.id}`, undefined, {shallow: true})}
+      onClick={() => router.push(`loja/${product.id}`)}
     >
       <Styled.CardContainer>
         <Styled.ImageContainer>
-          <Styled.FlagContainer>
-            <Image
-              alt={`Bandeira da ${flag}`}
-              src={`${flag}`}
-              objectFit="contain"
-              layout="fill"
-              quality={100}
-            />
-          </Styled.FlagContainer>
           <Image 
             alt={`Foto do produto ${name}`}
             src={`${image}`}
@@ -44,8 +35,11 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
         <Styled.DetailsWrapper>
           <Styled.ProductName>{ name }</Styled.ProductName> 
           <Styled.GenericContainer>
-            <Styled.Price dashed={true}>R${formatedPrice}</Styled.Price>
-            <Styled.DiscountTag>{discount}% OFF</Styled.DiscountTag>
+            <BasePrice
+              dashed={true}
+              price={price}
+            />
+            <DiscountTag discount={discount}/>
           </Styled.GenericContainer>
           <Styled.GenericContainer>
             <Styled.MemberPriceLabel>Sócio Wine</Styled.MemberPriceLabel>
@@ -53,13 +47,16 @@ const ProductCard: React.FC<{product: Product}> = ({ product }) => {
           </Styled.GenericContainer>
           <Styled.GenericContainer>
             <Styled.NonMemberPriceLabel>Não sócio</Styled.NonMemberPriceLabel>
-            <Styled.Price dashed={false}>R${formatedNonMemberPrice}</Styled.Price>
+            <BasePrice
+              dashed={false}
+              price={priceNonMember}
+            />
           </Styled.GenericContainer>
         </Styled.DetailsWrapper>
       </Styled.CardContainer>
-      <Styled.CartButton onClick={handleButtonClick}>
-        Adicionar
-      </Styled.CartButton>
+      <BaseCartButton
+        handleClick={handleButtonClick}
+      />
     </Styled.Wrapper>
   );
 }

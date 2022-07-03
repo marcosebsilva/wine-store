@@ -49,37 +49,6 @@ export const ProductName = styled.h1`
     font-size: 1rem;
   }
 `
-export const Price = styled.s<{dashed: boolean}>`
-  position: relative;
-  display: inline;
-  font-size: 0.625rem;
-  /* 10px */
-  color: ${colors.blacker};
-  &:after {
-    content: '';
-    display: ${(props) => props.dashed ? 'block' : 'none'};
-    width: 100%;
-    bottom: 35%;
-    position: absolute;
-    background-color: ${colors.blacker};
-    height: 1px;
-  }
-  @media ${devices.desktopSmall} {
-    font-size: 0.75rem;
-    /* 12px */
-  }
-`
-export const DiscountTag = styled.span`
-  background-color: ${colors.branding_tavel_default};
-  font-size: 0.75rem;
-  /* 12px */
-  color: white;
-  padding: 3px 5px;
-  margin-left: 5px;
-  border-radius: 2px;
-  text-align: center;
-  display: inline-block;
-`
 export const MemberPriceLabel = styled.label`
   font-weight: 300;
   font-size: 0.625rem;
@@ -114,24 +83,5 @@ export const NonMemberPriceLabel = styled.label`
   @media ${devices.desktopSmall} {
     font-size: 0.75rem;
     /* 12px */
-  }
-`
-export const CartButton = styled.button`
-  width: 100%;
-  padding-inline: 47px;
-  background-color: ${colors.function_sucess_default};
-  color: white;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-`
-export const FlagContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 31px;
-  height: 31px;
-  @media ${devices.desktopSmall} {
-    right: 0;
   }
 `
