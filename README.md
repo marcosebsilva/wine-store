@@ -38,3 +38,8 @@ Abre o Cypress com:
 npm run cypress
 ```
 Escolhe uma categoria de testes e execute qualquer uma das specs disponíveis.
+
+## Feedbacks
+Fiquem à vontade pra abrir uma issue ou então dar uma olhadinha no que já ta por lá.
+Podem me mandar um zap/email/fax/sinal de fumaça tambem
+###### Bebam agua e comam frutas :)
