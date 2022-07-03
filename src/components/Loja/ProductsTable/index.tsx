@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import testSelectors from "../../../../cypress/fixtures/test_selectors";
-import useScreenSize from "../../../hooks/useScreenSize";
+import useIsDesktop from "../../../hooks/useIsDesktop";
 import sizes from "../../../styles/sizes";
 import Product from "../../../types/Product";
 import Loading from "../../UI/Loading";
@@ -15,8 +15,7 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
   const [paginatedProducts, setPaginatedProducts] = useState<Product[]>(products);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { width } = useScreenSize();
-  const isDesktop = useMemo<boolean>(() => width !== undefined && width >= sizes.desktopSmall, [width])
+  const isDesktop = useIsDesktop();
 
   const totalProducts = useMemo<number>(() => products.length, [products]);
   const pageCount = useMemo<number>(() => Math.ceil(totalProducts / itemsPerPage), [totalProducts, itemsPerPage]);

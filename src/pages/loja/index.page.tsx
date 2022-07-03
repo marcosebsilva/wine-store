@@ -8,7 +8,7 @@ import ProductsFilterDesktop from '../../components/Loja/ProductsFilterDesktop';
 import ProductsTable from '../../components/Loja/ProductsTable';
 import * as Styled from './style';
 import sizes from '../../styles/sizes';
-import useScreenSize from '../../hooks/useScreenSize';
+import useIsDesktop from '../../hooks/useIsDesktop';
 
 type LojaProps = {
   products: Product[],
@@ -16,9 +16,7 @@ type LojaProps = {
 
 const Loja: NextPage<LojaProps> = ({ products }) => {
   const [sortedProducts, setSortedProducts] = useState<Product[]>(products);
-  const { width } = useScreenSize();
-  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width])
-
+  const isDesktop = useIsDesktop();
   const { maxPrice, minPrice, query } = useSearch();
 
   useEffect(() => {
