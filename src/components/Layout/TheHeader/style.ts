@@ -2,11 +2,38 @@ import styled from 'styled-components';
 import devices from '../../../styles/devices';
 import colors from '../../../styles/colors';
 
+export const ToggleMenuButton = styled.button`
+  border: none;
+  position: relative;
 
+  &, &::before, &::after {
+    background-color: black;
+    height: 3px;
+    min-width: 22px;
+    border-radius: 2px;
+  }
+  &::before, &::after {
+    left: 0;
+    content: '';
+    position: absolute;
+    display: block;
+  }
+
+  &::before {
+    top: 6px;
+  }
+
+  &::after {
+    bottom: 6px;
+  }
+  @media ${devices.desktopSmall} {
+    display: none;
+  }
+`
 export const NavMenuContainer = styled.nav<{show: boolean}>`
   opacity: ${(props) => props.show ? '1' : '0'};
   visibility: ${(props) => props.show ? 'visible' : 'hidden'};
-  position: absolute;
+  position: fixed;
   z-index: 10;
   background-color: white;
   transition: 200ms;
@@ -15,6 +42,12 @@ export const NavMenuContainer = styled.nav<{show: boolean}>`
   height: 100%;
   width: 100%;
   text-align: center;
+
+  ${ToggleMenuButton} {
+    position: absolute;
+    top: 35px;
+    left: 20px;
+  }
   @media ${devices.desktopSmall} {
     opacity: 1;
     visibility: visible;
@@ -23,7 +56,6 @@ export const NavMenuContainer = styled.nav<{show: boolean}>`
     margin-right: auto;
   }
 `
-
 export const NavMenuList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -41,7 +73,6 @@ export const NavMenuList = styled.ul`
     gap: 40px;
   }
 `
-
 export const NavMenuLink = styled.a<{selected: boolean}>`
   font-size: 2rem;
   font-family: 'NeoSansStd';
@@ -81,37 +112,6 @@ export const NavMenuLink = styled.a<{selected: boolean}>`
     }
   }
 `
-
-export const ToggleMenuButton = styled.button`
-  border: none;
-  position: relative;
-  z-index: 1000;
-
-  &, &::before, &::after {
-    background-color: black;
-    height: 3px;
-    min-width: 22px;
-    border-radius: 2px;
-  }
-  &::before, &::after {
-    left: 0;
-    content: '';
-    position: absolute;
-    display: block;
-  }
-
-  &::before {
-    top: 6px;
-  }
-
-  &::after {
-    bottom: 6px;
-  }
-  @media ${devices.desktopSmall} {
-    display: none;
-  }
-`
-
 export const Wrapper = styled.header`
   display: flex;
   width: 100vw;
@@ -130,13 +130,11 @@ export const Wrapper = styled.header`
     padding-inline: 15vw;
   }
 `
-
 export const CartLogoContainer = styled.div`
   position: relative;
   min-width: 70px;
   height: 60px;
 `
-
 export const CartCount = styled.span`
   display: flex;
   align-items: center;
@@ -157,7 +155,6 @@ export const CartCount = styled.span`
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.61);
   }
 `
-
 export const WineLogoContainer = styled.div`
   position: relative;
   width: 78px;
@@ -168,12 +165,10 @@ export const WineLogoContainer = styled.div`
     height: 100;
   }
 `
-
 export const SearchInputContainer = styled.div`
   text-align: right;
   width: 100%;
 `
-
 export const SearchInput = styled.input`
   border: none;
   border-radius: 50%;
@@ -216,7 +211,6 @@ export const SearchInput = styled.input`
     }
   }
 `
-
 export const AccountIconContainer = styled.div`
   position: relative;
   display: none;
@@ -227,7 +221,6 @@ export const AccountIconContainer = styled.div`
     display: block;
   }
 `
-
 export const OptionsSection = styled.section`
   width: 70%;
   display: flex;

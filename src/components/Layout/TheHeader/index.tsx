@@ -14,7 +14,7 @@ import sizes from "../../../styles/sizes";
 const TheHeader: NextPage = () => {
   const [showNav, setShowNav] = useState<boolean>(false);
   const [input, setInput] = useState<string>('');
-  const { items } = useCart();
+  const { items, toggleCart } = useCart();
 
   const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
   const { route, push, asPath } = useRouter();
@@ -52,6 +52,7 @@ const TheHeader: NextPage = () => {
         />
       </Styled.WineLogoContainer>
       <Styled.NavMenuContainer show={showNav}>
+        <Styled.ToggleMenuButton onClick={() => setShowNav((prev) => !prev)} />
         <Styled.NavMenuList>
         {navMenuLinks.map((link, idx) => (
           <li key={`link${idx}`}>
@@ -85,7 +86,9 @@ const TheHeader: NextPage = () => {
             />
           </Styled.AccountIconContainer>
         )}
-        <Styled.CartLogoContainer>
+        <Styled.CartLogoContainer
+          onClick={toggleCart}
+        >
           <Image
             src="/icons/wine-cart.svg"
             alt="Wine icon"
