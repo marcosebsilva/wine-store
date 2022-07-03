@@ -1,4 +1,5 @@
-import React, { useCallback, createContext, useContext, useMemo, useState } from 'react';
+import React, { useCallback, createContext, useContext, useMemo, useState, useEffect } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 import Product from '../types/Product';
 
 interface ProductInCart extends Product {
@@ -7,14 +8,17 @@ interface ProductInCart extends Product {
 
 interface CartContext {
   items: ProductInCart[],
+  showCart: boolean,
   addToCart: (newItem: Product, quantity: number) => void,
   removeFromCart: (id: number) => void,
   increaseItemQuantity: (id: number) => void,
+  toggleCart: () => void,
   decreaseItemQuantity: (id: number) => void,
 }
 
 const initialContext: CartContext = {
   items: [],
+  showCart: false,
   removeFromCart: () => {
     throw new Error('removeFromCart is not implemented')
   },
@@ -27,12 +31,24 @@ const initialContext: CartContext = {
   addToCart: () => {
     throw new Error('addToCart is not implemented');
   },
+  toggleCart: () => {
+    throw new Error('addToCart is not implemented');
+  },
 };
 
 const CartContext = createContext<CartContext>(initialContext);
 
 export function CartProvider({ children }: React.PropsWithChildren) {
   const [cart, updateCart] = useState<CartContext>(initialContext);
+  const [localStorageCart, setLocalStorageCart] = useLocalStorage<ProductInCart[]>('wine-cart', []);
+
+  useEffect(() => {
+    setLocalStorageCart(cart.items);
+  }, [cart.items, setLocalStorageCart]);
+
+  useEffect(() => {
+    updateCart((prev) => ({...prev, items: localStorageCart}));
+  }, []);
 
   const findItemInCart = useCallback((id: number) => cart.items.find((item) => item.id === id)
   , [cart])
@@ -42,7 +58,8 @@ export function CartProvider({ children }: React.PropsWithChildren) {
       if (!item) return;
 
       const itemIndex = cart.items.indexOf(item);
-      const newCartItems = cart.items.splice(itemIndex, 1);
+      const newCartItems = [...cart.items];
+      newCartItems.splice(itemIndex, 1);
     
       updateCart((prev) => ({
         ...prev,
@@ -103,16 +120,21 @@ export function CartProvider({ children }: React.PropsWithChildren) {
       ...prev,
       items: newCartItems
     }));
-  }, [cart, findItemInCart, increaseItemQuantity])
+  }, [cart, findItemInCart, increaseItemQuantity]);
+
+  const toggleCart = useCallback(() => {
+    updateCart((prev) => ({...prev, showCart: !prev.showCart }))
+  }, []);
   
   const providerValue = useMemo(() => ({
       ...cart,
       removeFromCart,
       increaseItemQuantity,
       addToCart,
-      decreaseItemQuantity
+      decreaseItemQuantity,
+      toggleCart,
     }),
-    [cart, removeFromCart, increaseItemQuantity, addToCart, decreaseItemQuantity],
+    [cart, removeFromCart, increaseItemQuantity, addToCart, decreaseItemQuantity, toggleCart],
   );
 
   return (
