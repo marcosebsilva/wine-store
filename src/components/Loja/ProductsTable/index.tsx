@@ -15,10 +15,10 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { width } = useScreenSize();
-  const isDesktop = useMemo(() => width !== undefined && width >= sizes.desktopSmall, [width])
+  const isDesktop = useMemo<boolean>(() => width !== undefined && width >= sizes.desktopSmall, [width])
 
-  const totalProducts = useMemo(() => products.length, [products]);
-  const pageCount = useMemo(() => Math.ceil(totalProducts / itemsPerPage), [totalProducts, itemsPerPage]);
+  const totalProducts = useMemo<number>(() => products.length, [products]);
+  const pageCount = useMemo<number>(() => Math.ceil(totalProducts / itemsPerPage), [totalProducts, itemsPerPage]);
 
   const updatePaginatedProducts = useCallback(() => {
     const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);

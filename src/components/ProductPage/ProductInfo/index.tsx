@@ -16,7 +16,7 @@ interface ProductInfoProps {
 }
 const ProductInfo: React.FC<ProductInfoProps> = ({flag, country, type, size, avaliations, rating, classification}) => {
   const { width } = useScreenSize();
-  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width]);
+  const isDesktop = useMemo<boolean>(() => width !== undefined && width > sizes.desktopSmall, [width]);
   const renderRating = () => {
     const stars = [];
     if(avaliations > 0) {

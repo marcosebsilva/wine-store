@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useMemo, useState, useCallback } from "react";
+import { ReactElement, useEffect, useMemo, useState, useCallback, ReactNode } from "react";
 import * as Styled from './style';
 import {v4 as generateId} from 'uuid';
 
@@ -12,8 +12,8 @@ interface PaginationControllerProps {
 
 const PaginationController: React.FC<PaginationControllerProps> = ({ currentPage, handlePageClick, pageCount, maxAmountOfButtons, minAmountOfButtons }) => {
   const [pages, setPages] = useState<ReactElement[]>([]);
-  const shouldRenderLeftDots = useMemo(() => Math.max(currentPage - 1, 1) >= maxAmountOfButtons, [maxAmountOfButtons, currentPage]);
-  const shouldRenderRightDots = useMemo(() =>  currentPage + minAmountOfButtons <= pageCount, [pageCount, minAmountOfButtons, currentPage]);
+  const shouldRenderLeftDots = useMemo<boolean>(() => Math.max(currentPage - 1, 1) >= maxAmountOfButtons, [maxAmountOfButtons, currentPage]);
+  const shouldRenderRightDots = useMemo<boolean>(() =>  currentPage + minAmountOfButtons <= pageCount, [pageCount, minAmountOfButtons, currentPage]);
 
   const generateDotsButton = useCallback((value: number) => {
     return (
@@ -25,7 +25,7 @@ const PaginationController: React.FC<PaginationControllerProps> = ({ currentPage
       </Styled.Dots>);
   }, [handlePageClick])
 
-  const pagesToRender = useMemo(() => {
+  const pagesToRender = useMemo<ReactElement[]>(() => {
     if(shouldRenderRightDots && shouldRenderLeftDots){
       return [
         generateDotsButton(currentPage - 1),
