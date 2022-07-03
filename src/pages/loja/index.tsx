@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSearch } from '../../context/SearchContext';
 import { getAllProducts } from '../../services/wine-api/calls';
 import { filterByPrice, filterByQuery } from '../../services/wine-api/filters';
@@ -8,6 +8,7 @@ import ProductsFilterDesktop from '../../components/Loja/ProductsFilterDesktop';
 import ProductsTable from '../../components/Loja/ProductsTable';
 import * as Styled from './style';
 import sizes from '../../styles/sizes';
+import useScreenSize from '../../hooks/useScreenSize';
 
 type LojaProps = {
   products: Product[],
@@ -15,28 +16,10 @@ type LojaProps = {
 
 const Loja: NextPage<LojaProps> = ({ products }) => {
   const [sortedProducts, setSortedProducts] = useState<Product[]>(products);
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+  const { width } = useScreenSize();
+  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width])
 
   const { maxPrice, minPrice, query } = useSearch();
-
-  useEffect(() => {
-    if(window.innerWidth > sizes.desktopSmall) {
-      setIsDesktop(true);
-    } else {
-      setIsDesktop(false);
-    }
-    const updateSize = () => {
-      if (window.innerWidth > sizes.desktopSmall) {
-        setIsDesktop(true);
-      } else {
-        setIsDesktop(false);
-      }
-    };
-
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-
 
   useEffect(() => {
     let priceSorteredProducts: Product[];
@@ -61,7 +44,6 @@ const Loja: NextPage<LojaProps> = ({ products }) => {
     <Styled.MainWrapper>
       {isDesktop && <ProductsFilterDesktop />}
       <ProductsTable
-        isDesktop={isDesktop} 
         products={sortedProducts}
       />
     </Styled.MainWrapper>
