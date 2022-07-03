@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import useScreenSize from "../../../hooks/useScreenSize";
 import sizes from "../../../styles/sizes";
 import Product from "../../../types/Product";
+import Loading from "../../UI/Loading";
 import PaginationController from "../PaginationControllerDesktop";
 import PaginationControllerMobile from "../PaginationControllerMobile";
 import ProductCard from "../ProductCard";
@@ -55,7 +56,7 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
   }
 
   const renderDesktopPagination = () => {
-    if(pageCount > 1) {
+    if(pageCount > 1 && !loading) {
       return (
         <PaginationController
           pageCount={pageCount}
@@ -63,6 +64,18 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
           handlePageClick={handlePageClick}
           maxAmountOfButtons={3}
           minAmountOfButtons={2}
+        />
+      )
+    }
+  }
+
+  const renderMobilePagination = () => {
+    if(!loading) {
+      return (
+        <PaginationControllerMobile
+          showMore={() => showMoreProducts(8)}
+          totalCount={totalProducts}
+          itemsPerPage={itemsPerPage}
         />
       )
     }
@@ -76,7 +89,8 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
     }
   }
 
-  const cardClickCallback = () => { 
+  const cardClickCallback = () => {
+    setLoading(true);
     console.log('redirecting...');
   }
 
@@ -85,26 +99,18 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
       <Styled.ResultCount>
         <b>{totalProducts}</b> produtos encontrados
       </Styled.ResultCount>
-      <Styled.ProductsContainer>
-        {!loading && (paginatedProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              cardClickCallback={cardClickCallback}
-            />
-          )))
-        }
-      </Styled.ProductsContainer>
-      {isDesktop
-        ? renderDesktopPagination()
-        : (
-          <PaginationControllerMobile
-            showMore={() => showMoreProducts(8)}
-            totalCount={totalProducts}
-            itemsPerPage={itemsPerPage}
-          />
-        )
-      }
+        {loading ? <Loading /> : (
+          <Styled.ProductsContainer>
+            {paginatedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                cardClickCallback={cardClickCallback}
+              />
+            ))}
+          </Styled.ProductsContainer>
+        )}
+      {isDesktop ? renderDesktopPagination() : renderMobilePagination()}
     </Styled.Wrapper>
   )
 }
