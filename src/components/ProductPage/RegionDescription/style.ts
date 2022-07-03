@@ -27,5 +27,6 @@ export const Arrow = styled.span`
 `
 
 export const RegionText = styled.span`
-  color: ${colors.gray_lighter}
+  color: ${colors.gray_lighter};
+  font-weight: normal;
 `
