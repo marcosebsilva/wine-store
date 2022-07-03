@@ -1,11 +1,12 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState, useMemo } from "react";
+import { ChangeEvent, useState, useMemo, useEffect } from "react";
 import { useCart } from "../../../context/CartContext";
 import { useSearch } from "../../../context/SearchContext";
 import * as Styled from './style';
 import { KeyboardEvent } from "react";
+import Link from "next/link";
 
 
 const TheHeader: NextPage = () => {
@@ -14,7 +15,7 @@ const TheHeader: NextPage = () => {
   const { items } = useCart();
 
   const cartCount = useMemo(() => items.reduce((acc, current) => acc + current.quantity, 0), [items]);
-  const { route, push } = useRouter();
+  const { route, push, asPath } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
   const { updateSearch } = useSearch();
 
@@ -28,6 +29,10 @@ const TheHeader: NextPage = () => {
       push('/loja');
     }
   }
+
+  useEffect(() => {
+    setShowNav(false);
+  }, [asPath])
 
   return (
     <Styled.Wrapper>
@@ -46,11 +51,13 @@ const TheHeader: NextPage = () => {
         <Styled.NavMenuList>
         {navMenuLinks.map((link, idx) => (
           <li key={`link${idx}`}>
-            <Styled.NavMenuLink
-              selected={route.includes(link.toLowerCase())}
-            >
-              {link}
-            </Styled.NavMenuLink>
+            <Link href={link.toLowerCase() === 'loja' ? '/loja' : '#'}>
+              <Styled.NavMenuLink
+                selected={route.includes(link.toLowerCase())}
+              >
+                {link}
+              </Styled.NavMenuLink>
+            </Link>
           </li>
         ))}
         </Styled.NavMenuList>
