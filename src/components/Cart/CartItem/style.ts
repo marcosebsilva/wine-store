@@ -3,7 +3,6 @@ import {Wrapper as BaseCounterWrapper} from "../../UI/BaseCounter/style";
 
 export const Wrapper = styled.div`
   display: flex;
-  max-width: 100%;
   padding-inline: 10px;
   border-radius: 5px;
   align-items: center;

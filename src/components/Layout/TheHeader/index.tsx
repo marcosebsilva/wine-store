@@ -7,8 +7,7 @@ import { useSearch } from "../../../context/SearchContext";
 import * as Styled from './style';
 import { KeyboardEvent } from "react";
 import Link from "next/link";
-import useScreenSize from "../../../hooks/useScreenSize";
-import sizes from "../../../styles/sizes";
+import useIsDesktop from "../../../hooks/useIsDesktop";
 import testSelectors from "../../../../cypress/fixtures/test_selectors";
 
 
@@ -21,9 +20,7 @@ const TheHeader: NextPage = () => {
   const { route, push, asPath } = useRouter();
   const navMenuLinks: string[] = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
   const { updateSearch } = useSearch();
-  const { width } = useScreenSize();
-
-  const isDesktop = useMemo(() => width !== undefined && width > sizes.desktopSmall, [width])
+  const isDesktop = useIsDesktop();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -63,6 +60,7 @@ const TheHeader: NextPage = () => {
           src="/icons/wine-logo.svg"
           objectFit="contain"
           layout="fill"
+          priority={true}
         />
       </Styled.WineLogoContainer>
       <Styled.NavMenuContainer show={showNav} data-testid={testSelectors.navMenu}>
@@ -96,6 +94,7 @@ const TheHeader: NextPage = () => {
               alt="Wine icon"
               objectFit="contain"
               layout="fill"
+              priority={true}
             />
           </Styled.AccountIconContainer>
         )}
@@ -109,6 +108,7 @@ const TheHeader: NextPage = () => {
             alt="Wine icon"
             objectFit="contain"
             layout="fill"
+            priority={true}
           />
           <Styled.CartCount data-testid={testSelectors.cartCount}>{ cartCount }</Styled.CartCount>
         </Styled.CartLogoContainer>

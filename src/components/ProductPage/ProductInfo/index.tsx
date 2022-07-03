@@ -1,6 +1,6 @@
 import * as Styled from './style';
 import Image from 'next/image';
-import useScreenSize from '../../../hooks/useScreenSize';
+import useIsDesktop from '../../../hooks/useIsDesktop';
 import sizes from '../../../styles/sizes';
 import { useMemo } from 'react';
 import {v4 as generateId} from 'uuid';
@@ -15,8 +15,7 @@ interface ProductInfoProps {
   rating: number
 }
 const ProductInfo: React.FC<ProductInfoProps> = ({flag, country, type, size, avaliations, rating, classification}) => {
-  const { width } = useScreenSize();
-  const isDesktop = useMemo<boolean>(() => width !== undefined && width > sizes.desktopSmall, [width]);
+  const isDesktop = useIsDesktop();
   const renderRating = () => {
     const stars = [];
     if(avaliations > 0) {

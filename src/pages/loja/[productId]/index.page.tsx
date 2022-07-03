@@ -12,7 +12,7 @@ import PriceContainerMobile from '../../../components/ProductPage/PriceContainer
 import { useCart } from '../../../context/CartContext';
 import { useEffect, useMemo, useState } from 'react';
 import sizes from '../../../styles/sizes';
-import useScreenSize from '../../../hooks/useScreenSize';
+import useIsDesktop from '../../../hooks/useIsDesktop';
 import PriceContainerDesktop from '../../../components/ProductPage/PriceContainerDesktop';
 import BaseCartButton from '../../../components/UI/BaseCartButton';
 import BaseCounter from '../../../components/UI/BaseCounter';
@@ -42,15 +42,13 @@ const ProductDetails: NextPage<ProductDetailsProps> = ({ product }) => {
   } = product;
 
   const { addToCart } = useCart();
-  const { width } = useScreenSize();
+  const isDesktop = useIsDesktop();
   const [quantityToIncrease, setQuantity] = useState<number>(1);
 
   const decreaseQuantity = () => {
     if(quantityToIncrease <= 1) return;
     setQuantity((prev) => prev - 1);
   }
-
-  const isDesktop = useMemo(() => width !== undefined && width >= sizes.desktopSmall, [width]);
 
   useEffect(() =>{
     if(!isDesktop){
