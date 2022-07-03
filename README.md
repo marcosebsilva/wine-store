@@ -33,6 +33,8 @@ Inicie o projeto
    npm run dev
 ```
 
+Acesse `localhost:3000` ou a localização disponibilizada no seu terminal
+
 ## Testes
 Abre o Cypress com:
 ```sh
