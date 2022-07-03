@@ -7,7 +7,7 @@ export async function getAllProducts() {
     const { data }: AxiosResponse<ApiResponse> = await WineInstance.get('/');
     return data;
   } catch (error) {
-    console.log(error);
-    throw error
+    console.log('Error ocurred during API request');
+    throw error;
   }
 }

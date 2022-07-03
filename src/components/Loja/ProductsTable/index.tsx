@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import testSelectors from "../../../../cypress/fixtures/test_selectors";
 import useScreenSize from "../../../hooks/useScreenSize";
 import sizes from "../../../styles/sizes";
 import Product from "../../../types/Product";
@@ -96,7 +97,7 @@ const ProductsTable: React.FC<{products: Product[]}> = ({ products }) => {
 
   return(
     <Styled.Wrapper>
-      <Styled.ResultCount>
+      <Styled.ResultCount data-testid={testSelectors.totalProductCount}>
         <b>{totalProducts}</b> produtos encontrados
       </Styled.ResultCount>
         {loading ? <Loading /> : (

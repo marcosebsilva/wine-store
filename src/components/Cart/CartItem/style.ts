@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import colors from "../../../styles/colors";
 import {Wrapper as BaseCounterWrapper} from "../../UI/BaseCounter/style";
-
 
 export const Wrapper = styled.div`
   display: flex;

@@ -9,6 +9,7 @@ import { KeyboardEvent } from "react";
 import Link from "next/link";
 import useScreenSize from "../../../hooks/useScreenSize";
 import sizes from "../../../styles/sizes";
+import testSelectors from "../../../../cypress/fixtures/test_selectors";
 
 
 const TheHeader: NextPage = () => {
@@ -28,10 +29,16 @@ const TheHeader: NextPage = () => {
     setInput(e.target.value);
   }
 
-  const handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDownInput = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       updateSearch({query: input});
       push('/loja');
+    }
+  }
+
+  const handleKeyDownToggleMenuButton = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if(e.key === 'Enter') {
+      setShowNav((prev) => !prev)
     }
   }
 
@@ -42,7 +49,14 @@ const TheHeader: NextPage = () => {
 
   return (
     <Styled.Wrapper>
-      {!isDesktop && <Styled.ToggleMenuButton onClick={() => setShowNav((prev) => !prev)} />}
+      {!isDesktop && (
+        <Styled.ToggleMenuButton
+          aria-pressed={true}
+          data-testid={testSelectors.navMenuToggleButton}
+          onClick={() => setShowNav((prev) => !prev)}
+          onKeyDown={handleKeyDownToggleMenuButton}
+        />
+        )}
       <Styled.WineLogoContainer>
         <Image 
           alt="Logotipo principal Wine"
@@ -51,8 +65,7 @@ const TheHeader: NextPage = () => {
           layout="fill"
         />
       </Styled.WineLogoContainer>
-      <Styled.NavMenuContainer show={showNav}>
-        <Styled.ToggleMenuButton onClick={() => setShowNav((prev) => !prev)} />
+      <Styled.NavMenuContainer show={showNav} data-testid={testSelectors.navMenu}>
         <Styled.NavMenuList>
         {navMenuLinks.map((link, idx) => (
           <li key={`link${idx}`}>
@@ -73,7 +86,7 @@ const TheHeader: NextPage = () => {
             placeholder="Pressione enter para pesquisar"
             onChange={handleInputChange}
             value={input}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleKeyDownInput}
           />
         </Styled.SearchInputContainer>
         {isDesktop && (
@@ -88,6 +101,8 @@ const TheHeader: NextPage = () => {
         )}
         <Styled.CartLogoContainer
           onClick={toggleCart}
+          data-testid={testSelectors.cartToggleButton}
+          role="button"
         >
           <Image
             src="/icons/wine-cart.svg"
@@ -95,7 +110,7 @@ const TheHeader: NextPage = () => {
             objectFit="contain"
             layout="fill"
           />
-          <Styled.CartCount>{ cartCount }</Styled.CartCount>
+          <Styled.CartCount data-testid={testSelectors.cartCount}>{ cartCount }</Styled.CartCount>
         </Styled.CartLogoContainer>
       </Styled.OptionsSection>
     </Styled.Wrapper>

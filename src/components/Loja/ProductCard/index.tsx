@@ -9,6 +9,7 @@ import BasePrice from "../../UI/BasePrice";
 import BaseCartButton from "../../UI/BaseCartButton";
 import NonMemberPrice from "../../UI/NonMemberPrice";
 import { MouseEvent, useEffect, useState } from "react";
+import testSelectors from "../../../../cypress/fixtures/test_selectors";
 
 
 interface ProductCardProps {
@@ -32,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, cardClickCallback = 
   }
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper data-testid={testSelectors.productCard}>
       <Styled.CardContainer onClick={handleCardClick}>
         <Styled.ImageContainer>
           <Image 

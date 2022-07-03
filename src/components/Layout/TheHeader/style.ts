@@ -5,6 +5,7 @@ import colors from '../../../styles/colors';
 export const ToggleMenuButton = styled.button`
   border: none;
   position: relative;
+  z-index: 1000;
 
   &, &::before, &::after {
     background-color: black;
@@ -134,6 +135,7 @@ export const CartLogoContainer = styled.div`
   position: relative;
   min-width: 70px;
   height: 60px;
+  z-index: 10;
 `
 export const CartCount = styled.span`
   display: flex;

@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { formatPrice } from '../../utils/functions';
+import testSelectors from '../../../cypress/fixtures/test_selectors';
 
 const Cart: React.FC = () => {
   const { showCart, toggleCart, items } = useCart();
@@ -21,8 +22,14 @@ const Cart: React.FC = () => {
   }, [route.asPath]);
 
   return(
-    <Styled.Wrapper show={showCart}>
-      <Styled.CloseButton onClick={toggleCart}>Close</Styled.CloseButton>
+    <Styled.Wrapper show={showCart} data-testid="cart">
+      <Styled.CloseButton
+        onClick={toggleCart}
+        onKeyDown={(e) => e.key === 'Enter' && toggleCart}
+        data-testid={testSelectors.cartCloseButton}
+      >
+        Fechar
+      </Styled.CloseButton>
       <Styled.CartList>
         {items.map((item) => (
           <li key={item.id}>
