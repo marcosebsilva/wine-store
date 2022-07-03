@@ -4,7 +4,7 @@ import BasePrice from '../../UI/BasePrice';
 import DiscountTag from '../../UI/DiscountTag';
 import * as Styled from './style';
 
-interface PriceContainerProps {
+interface PriceContainerMobilePorps {
   discount: number,
   price: number,
   priceMember: number,
@@ -12,9 +12,7 @@ interface PriceContainerProps {
   handleButtonClick: () => void
 }
 
-const PriceContainer: React.FC<PriceContainerProps> = ({ discount, price, priceMember, priceNonMember, handleButtonClick }) => {
-
-
+const PriceContainerMobile: React.FC<PriceContainerMobilePorps> = ({ discount, price, priceMember, priceNonMember, handleButtonClick }) => {
   return(
     <Styled.Wrapper>
       <DiscountTag discount={discount}/>
@@ -41,4 +39,4 @@ const PriceContainer: React.FC<PriceContainerProps> = ({ discount, price, priceM
   );
 }
 
-export default PriceContainer;
+export default PriceContainerMobile;
