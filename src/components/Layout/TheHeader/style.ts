@@ -2,18 +2,21 @@ import styled from 'styled-components';
 import devices from '../../../styles/devices';
 import colors from '../../../styles/colors';
 
-export const ToggleMenuButton = styled.button`
+export const ToggleMenuButton = styled.button<{active: boolean}>`
   border: none;
   position: relative;
   z-index: 1000;
 
+
   &, &::before, &::after {
-    background-color: black;
-    height: 3px;
-    min-width: 22px;
     border-radius: 2px;
+    min-width: 22px;
+    background-color: ${(props) => props.active ? colors.wine_purple : 'black'};
+    height: 3px;
   }
+
   &::before, &::after {
+    opacity: 1;
     left: 0;
     content: '';
     position: absolute;
@@ -27,6 +30,7 @@ export const ToggleMenuButton = styled.button`
   &::after {
     bottom: 6px;
   }
+
   @media ${devices.desktopSmall} {
     display: none;
   }
@@ -135,6 +139,10 @@ export const CartLogoContainer = styled.div`
   min-width: 70px;
   height: 60px;
   z-index: 10;
+  transition: 100ms;
+  &:active {
+    transform: scale(0.95);
+  }
 `
 export const CartCount = styled.span`
   display: flex;

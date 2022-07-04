@@ -48,6 +48,7 @@ const TheHeader: NextPage = () => {
     <Styled.Wrapper>
       {!isDesktop && (
         <Styled.ToggleMenuButton
+          active={ showNav }
           aria-pressed={true}
           data-testid={testSelectors.navMenuToggleButton}
           onClick={() => setShowNav((prev) => !prev)}

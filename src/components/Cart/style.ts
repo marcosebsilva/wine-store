@@ -38,6 +38,12 @@ export const CloseButton = styled.button`
   color: white;
   font-weight: bold;
   border-radius: 5px;
+  transition: 100ms;
+  &:hover{
+    background-color: white;
+    border: 1px solid ${colors.wine_purple};
+    color: ${colors.wine_purple};
+  }
 `
 export const Total = styled.b`
   padding: 10px;
