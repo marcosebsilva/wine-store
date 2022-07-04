@@ -7,7 +7,7 @@ const colors = {
   background: "rgba(245, 245, 245, 1)",
   branding_tavel_default: "rgba(247, 149, 82, 1)",
   function_sucess_default: "rgba(126, 188, 67, 1)",
-  function_sucess_dark: "rgba(10, 130, 67, 0.2)",
+  function_sucess_light: "rgba(127, 237, 21, 1)",
   wine_purple: "rgba(182, 17, 110, 1)",
   branding_chenin_default: "rgba(242, 102, 73, 1)",
 }

@@ -15,9 +15,10 @@ export const Button = styled.button`
   color: ${colors.wine_purple};
   border-radius: 4px;
   font-weight: bold;
-  padding: 12px 24px;
+  padding-inline: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-size: 0.875rem;
-  /* 14px */
   border: 2px solid ${colors.wine_purple};
   &:disabled {
     color: ${colors.gray};

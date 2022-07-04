@@ -12,14 +12,8 @@ export const Wrapper = styled.button`
   padding-bottom: 12px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  transition: 200ms;
-
-  @media ${devices.desktopSmall}{
-    &:hover {
-      transform: scale(1.03);
-    }
-    &:active {
-      transform: scale(1);
-    }
+  transition: 100ms;
+  &:active {
+    transform: scale(0.95);
   }
 `
