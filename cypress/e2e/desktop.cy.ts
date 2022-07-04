@@ -1,9 +1,8 @@
 import sizes from "../../src/styles/sizes";
 
-describe('E2E Any device', () => {
+describe('E2E Desktop', () => {
   beforeEach(() => {
     cy.visit('localhost:3000');
-    cy.viewport(sizes.mobileSmall, 1000);
   });
 
   it('Update products when clicking on price filter', () => {

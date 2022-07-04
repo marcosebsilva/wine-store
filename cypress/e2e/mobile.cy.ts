@@ -1,7 +1,7 @@
 import sizes from "../../src/styles/sizes";
 import testSelectors from "../fixtures/test_selectors";
 
-describe('E2E Any device', () => {
+describe('E2E Mobile', () => {
   beforeEach(() => {
     cy.visit('localhost:3000');
     cy.viewport(sizes.mobileSmall, 1000);
