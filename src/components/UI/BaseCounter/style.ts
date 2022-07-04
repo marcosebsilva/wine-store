@@ -20,7 +20,7 @@ export const RoundButton  = styled.button`
   background-color: transparent;
   
   &:hover, &:active {
-    background-color: ${colors.function_sucess_dark};
+    background-color: ${colors.function_sucess_light};
   }
 
   &:active {
